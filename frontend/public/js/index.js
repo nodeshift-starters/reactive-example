@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const socket = new WebSocket('ws://localhost:3000');
+const socket = new WebSocket('ws://consumer-backend-nodejs-kafka.apps-crc.testing');
 
 // eslint-disable-next-line no-unused-vars
 const app = new Vue({
