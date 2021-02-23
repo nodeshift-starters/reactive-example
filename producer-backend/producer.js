@@ -3,9 +3,9 @@ const Chance = require('chance');
 
 const chance = new Chance();
 
-function initProducer() {
+function initProducer () {
   const producer = new Kaka.Producer({
-    'bootstrap.servers': 'localhost:9092',
+    'bootstrap.servers': 'nodejs-kafka-cluster-kafka-bootstrap:9092'
   });
 
   return new Promise((resolve, reject) => {
@@ -19,13 +19,13 @@ function initProducer() {
   });
 }
 
-async function createMessage() {
+async function createMessage () {
   const producer = await initProducer();
   const value = Buffer.from(chance.country({ full: true }));
   producer.produce('countries', null, value);
 }
 
-async function run() {
+async function run () {
   setInterval(createMessage, 1000);
 }
 

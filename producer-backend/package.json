@@ -4,13 +4,28 @@
   "description": "",
   "main": "producer.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint .",
+    "openshift": "nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-14",
+    "start": "node ."
   },
-  "keywords": [],
+  "files": [
+    "package.json",
+    "producer.js"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "dependencies": {
     "chance": "^1.1.7",
     "node-rdkafka": "^2.10.1"
+  },
+  "devDependencies": {
+    "nodeshift": "^6.2.0",
+    "eslint": "^7.13.0",
+    "eslint-config-semistandard": "^15.0.1",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.1.0"
   }
 }

@@ -2,14 +2,32 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "./bin/www",
   "scripts": {
+    "lint": "eslint .",
+    "openshift": "nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-14",
     "start": "node ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "files": [
+    "package.json",
+    "app.js",
+    "bin",
+    "public"
+  ],
+  "author": "Red Hat, Inc.",
+  "license": "Apache-2.0",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "kube-probe": "^1.0.2"
+  },
+  "devDependencies": {
+    "nodeshift": "^6.2.0",
+    "eslint": "^7.13.0",
+    "eslint-config-semistandard": "^15.0.1",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.1.0"
   }
 }
