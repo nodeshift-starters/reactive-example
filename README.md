@@ -54,3 +54,37 @@ npm install
 npm run openshift
 ```
 
+### Customize to run in your kafka environment
+
+**producer-backend**
+
+Change the address of the `bootstrap.servers` https://github.com/nodeshift-starters/reactive-example/blob/main/producer-backend/producer.js#L8
+
+And run:
+
+```
+npm install
+node producer.js
+```
+
+**consumer-backend**
+
+Change the address of the `metadata.broker.list` https://github.com/nodeshift-starters/reactive-example/blob/main/consumer-backend/consumer.js#L17
+
+And run:
+
+```
+npm install
+node consumer.js
+```
+
+**front-end**
+
+Change the address to point to your consumer-backend https://github.com/nodeshift-starters/reactive-example/blob/main/frontend/public/js/index.js#L2
+
+And run:
+
+```
+npm install
+npm start
+```
