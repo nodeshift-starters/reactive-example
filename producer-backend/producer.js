@@ -5,6 +5,7 @@ const chance = new Chance();
 
 function initProducer () {
   const producer = new Kaka.Producer({
+    // Alias for metadata.broker.list
     'bootstrap.servers': process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092'
   });
 

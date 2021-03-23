@@ -16,8 +16,8 @@ const stream = Kafka.KafkaConsumer.createReadStream(
   {
     'metadata.broker.list': process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092',
     'group.id': 'consumer-test', // identifier to use to help trace activity in Kafka
-    'socket.keepalive.enable': true, // TODO: add comment on what this does
-    'enable.auto.commit': false // TODO: add comment on what this does
+    'socket.keepalive.enable': true, // Enable TCP keep-alives on broker sockets
+    'enable.auto.commit': false // Automatically and periodically commit offsets in the background.
   },
   {},
   {
