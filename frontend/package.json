@@ -5,7 +5,7 @@
   "main": "./bin/www",
   "scripts": {
     "lint": "eslint .",
-    "openshift": "nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-14",
+    "openshift": "npx nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-14",
     "start": "node ."
   },
   "files": [

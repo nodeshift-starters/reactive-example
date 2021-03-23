@@ -1,5 +1,9 @@
 /* eslint-disable no-undef */
-const socket = new WebSocket('ws://consumer-backend-nodejs-kafka.apps-crc.testing');
+// Get the websocket URL based on the location
+const locationUrl = window.location.origin.replace('frontend', 'consumer-backend');
+const wsUrl = locationUrl.replace('http://', 'ws://');
+
+const socket = new WebSocket(wsUrl);
 
 // eslint-disable-next-line no-unused-vars
 const app = new Vue({

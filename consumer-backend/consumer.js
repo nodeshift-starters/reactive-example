@@ -14,10 +14,10 @@ const update = (value) =>
 
 const stream = Kafka.KafkaConsumer.createReadStream(
   {
-    'metadata.broker.list': 'nodejs-kafka-cluster-kafka-bootstrap:9092',
-    'group.id': 'consumer-test',
-    'socket.keepalive.enable': true,
-    'enable.auto.commit': false
+    'metadata.broker.list': process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092',
+    'group.id': 'consumer-test', // identifier to use to help trace activity in Kafka
+    'socket.keepalive.enable': true, // TODO: add comment on what this does
+    'enable.auto.commit': false // TODO: add comment on what this does
   },
   {},
   {

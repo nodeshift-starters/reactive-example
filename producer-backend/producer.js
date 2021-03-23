@@ -5,7 +5,7 @@ const chance = new Chance();
 
 function initProducer () {
   const producer = new Kaka.Producer({
-    'bootstrap.servers': 'nodejs-kafka-cluster-kafka-bootstrap:9092'
+    'bootstrap.servers': process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092'
   });
 
   return new Promise((resolve, reject) => {
@@ -19,14 +19,14 @@ function initProducer () {
   });
 }
 
-async function createMessage () {
-  const producer = await initProducer();
+async function createMessage (producer) {
   const value = Buffer.from(chance.country({ full: true }));
   producer.produce('countries', null, value);
 }
 
 async function run () {
-  setInterval(createMessage, 1000);
+  const producer = await initProducer();
+  setInterval(createMessage, 1000, producer);
 }
 
 run();
