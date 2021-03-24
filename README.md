@@ -12,7 +12,7 @@ This is composed by:
 
 ## Setup Kafka Operator
 
-Installing the Kafka Operator using the Web Console of Openshift is pretty straightforward.
+Installing the Kafka Operator using the Web Console of Openshift is pretty straightforward.  A more visual guide is provided [here](./KAFKA_OPERATOR_SETUP.md)
 
 First, go to the *Operator Hub* and search for *Kafka*.  A few choices might show up,  but we want the one that says "Strimzi" which is the community Kafka version.
 
