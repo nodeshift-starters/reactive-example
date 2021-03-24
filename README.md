@@ -14,7 +14,7 @@ This is composed by:
 
 Installing the Kafka Operator using the Web Console of Openshift is pretty straightforward.
 
-First, go to the *Operator Hub* and search for *Kafak*.  A few choices might show up,  but we want the one that says "Strimzi" which is the community Kafka version.
+First, go to the *Operator Hub* and search for *Kafka*.  A few choices might show up,  but we want the one that says "Strimzi" which is the community Kafka version.
 
 Since we just want the defaults, we can just click *install* on the next 2 screens.  Then wait until the operator is ready.
 
