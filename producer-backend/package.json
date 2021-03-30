@@ -16,7 +16,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "chance": "^1.1.7",
-    "node-rdkafka": "^2.10.1"
+    "kafkajs": "^1.15.0"
   },
   "devDependencies": {
     "nodeshift": "^6.2.0",

@@ -1,33 +1,29 @@
-const Kaka = require('node-rdkafka');
+const { Kafka } = require('kafkajs');
 const Chance = require('chance');
 
 const chance = new Chance();
 
-function initProducer () {
-  const producer = new Kaka.Producer({
-    // Alias for metadata.broker.list
-    'bootstrap.servers': process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092'
-  });
+const kafka = new Kafka({
+  clientId: 'kafkajs-producer',
+  brokers: ['nodejs-kafka-cluster-kafka-bootstrap:9092']
+});
 
-  return new Promise((resolve, reject) => {
-    producer
-      .on('ready', () => resolve(producer))
-      .on('event.error', (err) => {
-        console.error('event.error', err);
-        reject(err);
-      });
-    producer.connect();
-  });
-}
+const producer = kafka.producer();
 
-async function createMessage (producer) {
-  const value = Buffer.from(chance.country({ full: true }));
-  producer.produce('countries', null, value);
-}
+const createMessage = async () => {
+  try {
+    await producer.send({
+      topic: 'countries',
+      messages: [{ value: chance.country({ full: true }) }]
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-async function run () {
-  const producer = await initProducer();
-  setInterval(createMessage, 1000, producer);
-}
+const run = async () => {
+  await producer.connect();
+  setInterval(createMessage, 1000);
+};
 
-run();
+run().catch(console.error);

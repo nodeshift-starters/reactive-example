@@ -28,28 +28,21 @@ The last step of the setup, is to create a new Kafka instance.  This can be done
 
 Before clicking on the *Create Instance* link under the Kafka tab, make sure your "current project namespace" is the one you just created.  Once that is set, click the *Create Instance* link and just use the defaults, which should name the new cluster `my-cluster`
 
-## Deploy the Applications
-
-Both producer and consumer are using [node-rdkafka](https://github.com/Blizzard/node-rdkafka).
-
 ### producer-backend
 
-The producer-backend is using the [`Producer` constructor](https://github.com/Blizzard/node-rdkafka#sending-messages) to
-send messages to Kafka, which its content is a random country name.
+The producer-backend is using [KafkaJS](https://github.com/tulios/kafkajs#-usage) to send messages to Kafka, which its content is a random country name.
 
 If you used the defaults for the cluster naming, then nothing needs to change, but if you named the cluster something else, then you will need to change the server name in the code:
 
 ```
-new Kaka.Producer({
-  'bootstrap.servers': 'my-cluster-kafka-bootstrap:9092'
+const kafka = new Kafka({
+  brokers: 'my-cluster-kafka-bootstrap:9092'
 })
 ```
 
 ### consumer-backend
 
-The consumer-backend is using the [`Consumer Stream API`](https://github.com/Blizzard/node-rdkafka#stream-api-1).
-
-Similar to the producer backend,  if you named the cluster something other than `my-cluster` you will need to update the cluster name in the consumer code.
+Similar to the producer backend, the consumer is also using [KafkaJS](https://github.com/tulios/kafkajs#-usage). If you named the cluster something other than `my-cluster` you will need to update the cluster name in the consumer code.
 
 ### front-end
 

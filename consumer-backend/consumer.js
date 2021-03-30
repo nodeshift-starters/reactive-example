@@ -1,4 +1,4 @@
-const Kafka = require('node-rdkafka');
+const { Kafka } = require('kafkajs');
 const express = require('express');
 const ws = require('ws');
 const probe = require('kube-probe');
@@ -12,28 +12,25 @@ const wsServer = new ws.Server({ noServer: true });
 const update = (value) =>
   wsServer.clients.forEach((socket) => socket.send(value));
 
-const stream = Kafka.KafkaConsumer.createReadStream(
-  {
-    'metadata.broker.list': process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092',
-    'group.id': 'consumer-test', // identifier to use to help trace activity in Kafka
-    'socket.keepalive.enable': true, // Enable TCP keep-alives on broker sockets
-    'enable.auto.commit': false // Automatically and periodically commit offsets in the background.
-  },
-  {},
-  {
-    topics: 'countries'
-  }
-);
-
-stream.on('error', (err) => {
-  if (err) console.log(err);
+const kfk = new Kafka({
+  clientId: 'kafkajs-consumer',
+  brokers: ['nodejs-kafka-cluster-kafka-bootstrap:9092']
 });
 
-stream.on('data', (message) => {
-  console.log(message.value.toString());
-  update(message.value.toString());
-});
+const consumer = kfk.consumer({ groupId: 'consumer-test' });
 
+const run = async () => {
+  await consumer.connect();
+  await consumer.subscribe({ topic: 'countries', fromBeginning: true });
+
+  await consumer.run({
+    eachMessage: async ({ message }) => {
+      update(message.value.toString());
+    }
+  });
+};
+
+run();
 const server = app.listen('8080');
 
 server.on('upgrade', (request, socket, head) => {
