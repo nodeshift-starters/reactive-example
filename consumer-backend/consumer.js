@@ -14,7 +14,7 @@ const update = (value) =>
 
 const kfk = new Kafka({
   clientId: 'kafkajs-consumer',
-  brokers: ['nodejs-kafka-cluster-kafka-bootstrap:9092']
+  brokers: [process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092']
 });
 
 const consumer = kfk.consumer({ groupId: 'consumer-test' });

@@ -5,7 +5,7 @@ const chance = new Chance();
 
 const kafka = new Kafka({
   clientId: 'kafkajs-producer',
-  brokers: ['nodejs-kafka-cluster-kafka-bootstrap:9092']
+  brokers: [process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092']
 });
 
 const producer = kafka.producer();
