@@ -5,7 +5,7 @@
   "main": "producer.js",
   "scripts": {
     "lint": "eslint .",
-    "openshift": "npx nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-14",
+    "openshift": "npx nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-12",
     "start": "node ."
   },
   "files": [
@@ -16,7 +16,8 @@
   "license": "Apache-2.0",
   "dependencies": {
     "chance": "^1.1.7",
-    "node-rdkafka": "^2.10.1"
+    "node-rdkafka": "^2.10.1",
+    "kube-service-bindings": "^0.0.2"
   },
   "devDependencies": {
     "nodeshift": "^6.2.0",
