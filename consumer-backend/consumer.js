@@ -3,6 +3,7 @@ const express = require('express');
 const ws = require('ws');
 const probe = require('kube-probe');
 const app = express();
+const serviceBindings = require('kube-service-bindings');
 
 // Add basic health check endpoints
 probe(app);
@@ -12,10 +13,22 @@ const wsServer = new ws.Server({ noServer: true });
 const update = (value) =>
   wsServer.clients.forEach((socket) => socket.send(value));
 
-const kfk = new Kafka({
-  clientId: 'kafkajs-consumer',
-  brokers: [process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092']
-});
+let kafkaConnectionBindings;
+try {
+  // check if the deployment has been bound to a kafka instance through
+  // service bindings. If so use that connect info
+  kafkaConnectionBindings = serviceBindings.getBinding('KAFKA', 'kafkajs');
+} catch (err) {
+  // No service bindings. TODO: better error handling here
+  kafkaConnectionBindings = {
+    brokers: [process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092']
+  };
+}
+
+// add the client id
+kafkaConnectionBindings.clientId = 'kafkajs-consumer';
+
+const kfk = new Kafka(kafkaConnectionBindings);
 
 const consumer = kfk.consumer({ groupId: 'consumer-test' });
 
