@@ -5,29 +5,40 @@ const chance = new Chance();
 
 function initProducer () {
   const producer = new Kaka.Producer({
-    // Alias for metadata.broker.list
     'bootstrap.servers': process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092'
   });
 
   return new Promise((resolve, reject) => {
-    producer
-      .on('ready', () => resolve(producer))
-      .on('event.error', (err) => {
-        console.error('event.error', err);
-        reject(err);
-      });
     producer.connect();
+    producer.on('ready', () => resolve(producer));
+    producer.on('event.log', (log) => {
+      if (log.fac === 'FAIL') {
+        producer.disconnect();
+        reject(log.message);
+      }
+    });
   });
 }
 
 async function createMessage (producer) {
   const value = Buffer.from(chance.country({ full: true }));
-  producer.produce('countries', null, value);
+  console.log('producing...');
+  try {
+    producer.produce('countries', null, value);
+  } catch (err) {
+    console.error(err);
+  }
+  console.log('done.');
 }
 
 async function run () {
-  const producer = await initProducer();
-  setInterval(createMessage, 1000, producer);
+  let producer;
+  try {
+    producer = await initProducer();
+    setInterval(createMessage, 1000, producer);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 run();
