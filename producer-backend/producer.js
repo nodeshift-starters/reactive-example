@@ -1,14 +1,27 @@
 const { Kafka } = require('kafkajs');
 const Chance = require('chance');
+const serviceBindings = require('kube-service-bindings');
 
 const chance = new Chance();
 
-const kafka = new Kafka({
-  clientId: 'kafkajs-producer',
-  brokers: [process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092']
-});
+let kafkaConnectionBindings;
+try {
+  // check if the deployment has been bound to a kafka instance through
+  // service bindings. If so use that connect info
+  kafkaConnectionBindings = serviceBindings.getBinding('KAFKA', 'kafkajs');
+} catch (err) {
+  // No service bindings. TODO: better error handling here
+  kafkaConnectionBindings = {
+    brokers: [process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092']
+  };
+}
 
-const producer = kafka.producer();
+// add the client id
+kafkaConnectionBindings.clientId = 'kafkajs-producer';
+
+const kfk = new Kafka(kafkaConnectionBindings);
+
+const producer = kfk.producer();
 
 const createMessage = async () => {
   try {
