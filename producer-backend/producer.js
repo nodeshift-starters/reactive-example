@@ -1,15 +1,16 @@
-const Kaka = require('node-rdkafka');
+const Kafka = require('node-rdkafka');
 const Chance = require('chance');
 const serviceBindings = require('kube-service-bindings');
 
 const chance = new Chance();
 
 function initProducer () {
-  // set default kafa bindings for connecting to the kafka broker
+  // set default kafka bindings for connecting to the kafka broker
   let kafkaConnectionBindings =
     {
       'metadata.broker.list': process.env.KAFKA_BOOTSTRAP_SERVER ||
-                              'my-cluster-kafka-bootstrap:9092'
+                              'my-cluster-kafka-bootstrap:9092',
+      dr_cb: true
     };
 
   try {
@@ -18,15 +19,26 @@ function initProducer () {
     kafkaConnectionBindings = serviceBindings.getBinding('KAFKA', 'node-rdkafka');
   } catch (err) {}
 
-  const producer = new Kaka.Producer(kafkaConnectionBindings);
+  const producer = new Kafka.Producer(kafkaConnectionBindings);
+
+  // To make reconnection work.
+  producer.setPollInterval(300);
+
+  producer.on('delivery-report', (err, report) => {
+    if (err) {
+      console.error(err);
+    }
+    console.log(report);
+  });
 
   return new Promise((resolve, reject) => {
     producer.connect();
     producer.on('ready', () => resolve(producer));
-    producer.on('event.log', (log) => {
-      if (log.fac === 'FAIL') {
-        producer.disconnect();
-        reject(log.message);
+    producer.on('event.error', (err) => {
+      if (err) {
+        console.error(err);
+        // producer.disconnect(); if we call disconnect here, it will not reconnect.
+        reject(err);
       }
     });
   });
@@ -34,13 +46,11 @@ function initProducer () {
 
 async function createMessage (producer) {
   const value = Buffer.from(chance.country({ full: true }));
-  console.log('producing...');
   try {
     producer.produce('countries', null, value);
   } catch (err) {
     console.error(err);
   }
-  console.log('done.');
 }
 
 async function run () {
