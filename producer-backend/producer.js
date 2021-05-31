@@ -16,7 +16,14 @@ function initProducer () {
     // check if the deployment has been bound to a kafka instance through
     // service bindings. If so use that connect info
     kafkaConnectionBindings = serviceBindings.getBinding('KAFKA', 'node-rdkafka');
-  } catch (err) {}
+  } catch (err) {
+    if (process.env.KAFKA_SASL_MECHANISM === 'plain') {
+      kafkaConnectionBindings['sasl.mechanisms'] = 'PLAIN';
+      kafkaConnectionBindings['security.protocol'] = 'SASL_SSL';
+      kafkaConnectionBindings['sasl.password'] = process.env.KAFKA_CLIENT_SECRET;
+      kafkaConnectionBindings['sasl.username'] = process.env.KAFKA_CLIENT_ID;
+    }
+  }
 
   const producer = new Kaka.Producer(kafkaConnectionBindings);
 
