@@ -15,9 +15,11 @@ try {
     brokers: [process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092']
   };
   if (process.env.KAFKA_SASL_MECHANISM === 'plain') {
-    kafkaConnectionBindings.sasl =  { mechanism: process.env.KAFKA_SASL_MECHANISM,
-                                      username: process.env.KAFKA_CLIENT_ID,
-                                      password: process.env.KAFKA_CLIENT_SECRET }
+    kafkaConnectionBindings.sasl = {
+      mechanism: process.env.KAFKA_SASL_MECHANISM,
+      username: process.env.KAFKA_CLIENT_ID,
+      password: process.env.KAFKA_CLIENT_SECRET
+    };
     kafkaConnectionBindings.ssl = true;
   }
 }
@@ -31,9 +33,11 @@ const producer = kfk.producer();
 
 const createMessage = async () => {
   try {
+    const newMessage = { value: chance.country({ full: true }) };
+    console.log(newMessage.value);
     await producer.send({
       topic: 'countries',
-      messages: [{ value: chance.country({ full: true }) }]
+      messages: [newMessage]
     });
   } catch (err) {
     console.log(err);
