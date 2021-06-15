@@ -19,7 +19,7 @@
     "node-rdkafka": "^2.10.1",
     "ws": "^7.4.3",
     "kube-probe": "^1.0.2",
-    "kube-service-bindings": "^0.0.2"
+    "kube-service-bindings": "^0.0.3"
   },
   "devDependencies": {
     "nodeshift": "^6.2.0",
