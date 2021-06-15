@@ -2,7 +2,12 @@
 
 This is a basic end-to-end app that demonstrates publishing and subscribing to Kafka.
 
-This is composed by:
+While it's possible to write the consumer and producer in a single node.js project for demonstration purposes, we've decided to split it into three parts (not in monorepo form) to take advantage of the microservices architecture and deployment in Openshift to get closer to the four principles of reactive systems described in the 
+[reactive manifesto](https://www.reactivemanifesto.org/).
+
+Also a good suggestion to read item `5. Reactive programming != Reactive system` of the article [5 Things to Know About Reactive Programming](https://developers.redhat.com/blog/2017/06/30/5-things-to-know-about-reactive-programming)
+
+The example is composed by:
 
 - A standalone producer app (producer-backend)
 - An Express-Websocket server (consumer-backend)
