@@ -1,6 +1,6 @@
 # reactive-example
 
-![CI](https://github.com/nodeshift-starters/reactive-example/workflows/ci-action/badge.svg)
+![CI](https://github.com/nodeshift-starters/reactive-example/workflows/ci/badge.svg)
 
 This is a basic end-to-end app that demonstrates publishing and subscribing to Kafka.
 
