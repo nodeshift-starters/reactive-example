@@ -10,6 +10,8 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
+    env:
+      KAFKA_BOOTSTRAP_SERVER: localhost:9092
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -18,17 +20,15 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: ./scripts/start-server.sh
     - run: ./scripts/prepare.sh
-    - run: export KAFKA_BOOTSTRAP_SERVER=localhost:9092
     - run: nohup node producer-backend/producer.js > /dev/null 2>&1 & echo $! > prun.pid
     - run: nohup node consumer-backend/consumer.js > cout.log & echo $! > crun.pid
     - run: P=$(cat prun.pid)
     - run: C=$(cat crun.pid)
-    - run: sleep 3
+    - run: ./scripts/test-producer.sh
     - run: if [ -s cout.log ]; 
            then
-             cat cout.log
+             cat cout.log;
            else
-             echo "fail"
              exit 1;
            fi
     - run: ./scripts/stop-server.sh
