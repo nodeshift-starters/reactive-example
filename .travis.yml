@@ -1,0 +1,32 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - "14"
+before_script:
+   - ./scripts/start-server.sh
+   - ./scripts/prepare.sh
+script:
+   - export KAFKA_BOOTSTRAP_SERVER=localhost:9092
+   - nohup node producer-backend/producer.js > /dev/null 2>&1 & echo $! > prun.pid
+   - nohup node consumer-backend/consumer.js > cout.log & echo $! > crun.pid
+   - P=$(cat prun.pid)
+   - C=$(cat crun.pid)
+   - sleep 3
+   - if [ -s cout.log ]; 
+     then
+       cat cout.log
+     else
+       echo "fail"
+       exit 1;
+     fi
+   - kill $P
+   - kill $C
+   - rm cout.log
+   - rm prun.pid
+   - rm crum.pid
+after_script:
+   - ./scripts/stop-server.sh
+branches:
+  only:
+    - main
