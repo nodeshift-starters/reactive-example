@@ -45,7 +45,7 @@ send messages to Kafka, which its content is a random country name.
 If you used the defaults for the cluster naming, then nothing needs to change, but if you named the cluster something else, then you will need to change the server name in the code:
 
 ```
-new Kaka.Producer({
+new Kafka.Producer({
   'bootstrap.servers': 'my-cluster-kafka-bootstrap:9092'
 })
 ```
@@ -73,4 +73,14 @@ npm run openshift
 
 cd ../frontend
 npm run openshift
+```
+
+### Node-rdkafka and KafkaJS
+
+This (main) branch is using [node-rdkafka](https://github.com/Blizzard/node-rdkafka), which must be used with Node.js version < 16.x.
+
+You can also try the [KafkaJS](https://github.com/tulios/kafkajs/) version:
+
+```
+git checkout kafkajs
 ```

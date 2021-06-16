@@ -13,7 +13,7 @@ const wsServer = new ws.Server({ noServer: true });
 const update = (value) =>
   wsServer.clients.forEach((socket) => socket.send(value));
 
-// set default kafa bindings for connecting to the kafka broker
+// set default kafka bindings for connecting to the kafka broker
 let kafkaConnectionBindings =
   {
     'metadata.broker.list': process.env.KAFKA_BOOTSTRAP_SERVER ||
