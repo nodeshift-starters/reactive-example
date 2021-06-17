@@ -33,11 +33,11 @@ const producer = kfk.producer();
 
 const createMessage = async () => {
   try {
-    const newMessage = { value: chance.country({ full: true }) };
-    console.log(newMessage.value);
+    const msg = { key: 'example', value: chance.country({ full: true }), partition: 0 };
+    console.log(msg.value);
     await producer.send({
       topic: 'countries',
-      messages: [newMessage]
+      messages: [msg]
     });
   } catch (err) {
     console.log(err);
