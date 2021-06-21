@@ -86,3 +86,28 @@ You can also try the [KafkaJS](https://github.com/tulios/kafkajs/) version:
 ```
 git checkout kafkajs
 ```
+
+### Working with Managed Kafka
+
+Instead of installing a Kafka instance into your cluster you can also
+use a managed Kafka instance like
+[Red Hat OpenShift Streams for Apache Kafka (RHOSAK)](https://developers.redhat.com/products/red-hat-openshift-streams-for-apache-kafka/overview).
+If you are deploying into OpenShift and using RHOSAK, the example is all
+set up to use service bindings, and to connect your Kafka instance.
+Provided you have installed the OpenShift Application Services and
+Service Binding Operators and have configured them with your RHOSAK
+information you can simply drag the arrow from the producer and consumer
+on the OpenShift topoloy page onto icon for the Kafka instance.
+
+![dragging to connect Kafka](images/drag-to-connect.png)
+
+This is possible due to the use of the
+kube-service-bindings](https://github.com/nodeshift/kube-service-bindings)
+package. In the code you'll see a call to:
+
+```JavaScript
+  kafkaConnectionBindings = serviceBindings.getBinding('KAFKA', 'node-rdkafka');
+```
+
+which will get the connection info from the bindings if it is available and
+return it in the format required by the Kafka client.
