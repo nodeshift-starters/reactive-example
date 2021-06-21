@@ -102,7 +102,7 @@ on the OpenShift topoloy page onto icon for the Kafka instance.
 ![dragging to connect Kafka](images/drag-to-connect.png)
 
 This is possible due to the use of the
-kube-service-bindings](https://github.com/nodeshift/kube-service-bindings)
+[kube-service-bindings](https://github.com/nodeshift/kube-service-bindings)
 package. In the code you'll see a call to:
 
 ```JavaScript
