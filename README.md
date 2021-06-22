@@ -97,7 +97,7 @@ set up to use service bindings, and to connect your Kafka instance.
 Provided you have installed the OpenShift Application Services and
 Service Binding Operators and have configured them with your RHOSAK
 information you can simply drag the arrow from the producer and consumer
-on the OpenShift topoloy page onto icon for the Kafka instance.
+on the OpenShift topology page onto icon for the Kafka instance.
 
 ![dragging to connect Kafka](images/drag-to-connect.png)
 
