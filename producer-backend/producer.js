@@ -54,7 +54,8 @@ function initProducer () {
 async function createMessage (producer) {
   const value = Buffer.from(chance.country({ full: true }));
   try {
-		// topic, partition, message, key, timestamp
+    // topic, partition, message, key, timestamp
+    console.log(value.toString());
     producer.produce('countries', 0, value, 'example', 0);
   } catch (err) {
     console.error(err);
