@@ -16,19 +16,18 @@
   "license": "Apache-2.0",
   "dependencies": {
     "express": "^4.17.1",
+    "kube-service-bindings": "^0.0.3",
     "node-rdkafka": "^2.10.1",
-    "ws": "^7.4.3",
-    "kube-probe": "^1.0.2",
-    "kube-service-bindings": "^0.0.3"
+    "ws": "^7.4.3"
   },
   "devDependencies": {
-    "nodeshift": "^6.2.0",
     "eslint": "^7.13.0",
     "eslint-config-semistandard": "^15.0.1",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.1.0"
+    "eslint-plugin-standard": "^4.1.0",
+    "nodeshift": "^6.2.0"
   }
 }

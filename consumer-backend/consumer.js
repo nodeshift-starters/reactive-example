@@ -1,12 +1,17 @@
 const Kafka = require('node-rdkafka');
 const express = require('express');
 const ws = require('ws');
-const probe = require('kube-probe');
 const app = express();
 const serviceBindings = require('kube-service-bindings');
 
 // Add basic health check endpoints
-probe(app);
+app.use('/ready', (request, response) => {
+  return response.sendStatus(200);
+});
+
+app.use('/live', (request, response) => {
+  return response.sendStatus(200);
+});
 
 const wsServer = new ws.Server({ noServer: true });
 
