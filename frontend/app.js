@@ -1,13 +1,18 @@
 const fs = require('fs').promises;
 const http = require('http');
 const express = require('express');
-const probe = require('kube-probe');
 
 const app = express();
 const server = http.createServer(app);
 
 // Add basic health check endpoints
-probe(app);
+app.use('/ready', (request, response) => {
+  return response.sendStatus(200);
+});
+
+app.use('/live', (request, response) => {
+  return response.sendStatus(200);
+});
 
 app.use(express.static('public'));
 
