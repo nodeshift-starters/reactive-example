@@ -83,7 +83,7 @@ section in the Node.js reference architecture provides some recommendations on h
 This repository includes 2 branches, one for each of the clients so that you can use either of the
 clients when running the example.
 
-For KafkaJS there a no additional pre-requisites.
+For KafkaJS there are no additional pre-requisites.
 
 ### Working with Managed Kafka
 
