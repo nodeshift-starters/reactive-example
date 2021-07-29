@@ -77,7 +77,7 @@ npm run openshift
 ### node-rdkafka and KafkaJS
 
 node-rdkafka and KafkaJS are two commonly used Kafka clients. The
-[Message-Queueing- Kafka](https://github.com/nodeshift/nodejs-reference-architecture/blob/main/docs/functional-components/message-queuing.md).
+[Message-Queueing- Kafka](https://github.com/nodeshift/nodejs-reference-architecture/blob/main/docs/functional-components/message-queuing.md)
 section in the Node.js reference architecture provides some recommendations on how to choose which client to use.
 
 This respository includes 2 branches, one for each of the clients so that you can use either of the
