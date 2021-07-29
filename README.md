@@ -35,6 +35,10 @@ The last step of the setup, is to create a new Kafka instance.  This can be done
 
 Before clicking on the *Create Instance* link under the Kafka tab, make sure your "current project namespace" is the one you just created.  Once that is set, click the *Create Instance* link and just use the defaults, which should name the new cluster `my-cluster`
 
+## Deploy the Applications
+
+Both producer and consumer are using [KafkaJS](https://github.com/tulios/kafkajs).
+
 ### producer-backend
 
 The producer-backend is using [KafkaJS](https://github.com/tulios/kafkajs#-usage) to send messages to Kafka, which its content is a random country name.
@@ -106,4 +110,3 @@ package. In the code you'll see a call to:
 which will get the connection info from the bindings if it is available and
 return it in the format required by the Kafka client.
                                                                                         122,1         Bot
-
