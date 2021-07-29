@@ -80,7 +80,7 @@ npm run openshift
 ### node-rdkafka and KafkaJS
 
 node-rdkafka and KafkaJS are two commonly used Kafka clients. The
-[Message-Queueing- Kafka](https://github.com/nodeshift/nodejs-reference-architecture/blob/main/docs/functional-components/message-queuing.md).
+[Message-Queueing- Kafka](https://github.com/nodeshift/nodejs-reference-architecture/blob/main/docs/functional-components/message-queuing.md)
 section in the Node.js reference architecture provides some recommendations on how to choose which client to use.
 
 This respository includes 2 branches, one for each of the clients so that you can use either of the
@@ -100,7 +100,7 @@ More details on the requirements and installation instructions are available in 
 In addition, on Linux platforms we've found that you need to make sure you have installed the
 openssl-devel package (for example `dnf install openssl-devel on RHEL`).
 
-Another alternative is to install docker on your platform: [Get Docker](https://docs.docker.com/get-docker/), and then run using the [ubi8/nodejs-12](registry.access.redhat.com/ubi8/nodejs-12) which already
+Another alternative is to install docker on your platform ([Get Docker](https://docs.docker.com/get-docker/)), and then run using the [ubi8/nodejs-12](registry.access.redhat.com/ubi8/nodejs-12) which already
 includes all of the required pre-requisites:
 
 ```shell
