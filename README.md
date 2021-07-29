@@ -77,14 +77,34 @@ cd ../frontend
 npm run openshift
 ```
 
-### Node-rdkafka and KafkaJS
+### node-rdkafka and KafkaJS
 
-This (main) branch is using [node-rdkafka](https://github.com/Blizzard/node-rdkafka), which must be used with Node.js version < 16.x.
+node-rdkafka and KafkaJS are two commonly used Kafka clients. The
+[Message-Queueing- Kafka](https://github.com/nodeshift/nodejs-reference-architecture/blob/main/docs/functional-components/message-queuing.md).
+section in the Node.js reference architecture provides some recommendations on how to choose which client to use.
 
-You can also try the [KafkaJS](https://github.com/tulios/kafkajs/) version:
+This respository includes 2 branches, one for each of the clients so that you can use either of the
+clients when running the example.
 
-```
-git checkout kafkajs
+If you deploy to OpenShift with the instructions included in this repository
+either client can be used without any additional pre-requisites.
+
+If you want to run the components locally then there are additional pre-requisites:
+since node-rdkafka requires a development toolchain to build. These include:
+* Python v3.6, v3.7, v3.8, or v3.9
+* make
+* A proper C/C++ compiler toolchain
+
+More details on the requirements and installation instructions are available in [node-gyp - Installation](https://github.com/nodejs/node-gyp#installation).
+
+In addition, on Linux platforms we've found that you need to make sure you have installed the
+openssl-devel package (for example `dnf install openssl-devel on RHEL`).
+
+Another alternative is to install docker on your platform: [Get Docker](https://docs.docker.com/get-docker/), and then run using the [ubi8/nodejs-12](registry.access.redhat.com/ubi8/nodejs-12) which already
+includes all of the required pre-requisites:
+
+```shell
+docker run -it --user 0 registry.access.redhat.com/ubi8/nodejs-12 /bin/bash
 ```
 
 ### Working with Managed Kafka
