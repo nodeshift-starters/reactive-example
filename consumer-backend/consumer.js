@@ -1,4 +1,6 @@
 const Kafka = require('node-rdkafka');
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
 const express = require('express');
 const ws = require('ws');
 const app = express();
@@ -37,7 +39,6 @@ try {
     kafkaConnectionBindings['sasl.username'] = process.env.KAFKA_CLIENT_ID;
   }
 }
-
 
 const stream = Kafka.KafkaConsumer.createReadStream(
   Object.assign({
