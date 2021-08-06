@@ -1,4 +1,6 @@
 const Kafka = require('node-rdkafka');
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
 const Chance = require('chance');
 const serviceBindings = require('kube-service-bindings');
 
@@ -30,13 +32,6 @@ function initProducer () {
 
   // To make reconnection work.
   producer.setPollInterval(300);
-
-  producer.on('delivery-report', (err, report) => {
-    if (err) {
-      console.error(err);
-    }
-    console.log(report);
-  });
 
   return new Promise((resolve, reject) => {
     producer.connect();
