@@ -21,7 +21,7 @@
     "kube-probe": "^1.0.2"
   },
   "devDependencies": {
-    "nodeshift": "^6.2.0",
+    "nodeshift": "^8.0.0",
     "eslint": "^7.13.0",
     "eslint-config-semistandard": "^15.0.1",
     "eslint-config-standard": "^16.0.2",
