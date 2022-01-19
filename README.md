@@ -1,10 +1,8 @@
 # reactive-example
 
-![CI kafkajs](https://github.com/nodeshift-starters/reactive-example/workflows/ci/badge.svg)
-
 This is a basic end-to-end app that demonstrates publishing and subscribing to Kafka.
 
-While it's possible to write the consumer and producer in a single node.js project for demonstration purposes, we've decided to split it into three parts (not in monorepo form) to take advantage of the microservices architecture and deployment in Openshift to get closer to the four principles of reactive systems described in the 
+While it's possible to write the consumer and producer in a single node.js project for demonstration purposes, we've decided to split it into three parts (not in monorepo form) to take advantage of the microservices architecture and deployment in OpenShift to get closer to the four principles of reactive systems described in the 
 [reactive manifesto](https://www.reactivemanifesto.org/).
 
 Also a good suggestion to read item `5. Reactive programming != Reactive system` of the article [5 Things to Know About Reactive Programming](https://developers.redhat.com/blog/2017/06/30/5-things-to-know-about-reactive-programming)
@@ -15,11 +13,11 @@ The example is composed by:
 - An Express-Websocket server (consumer-backend)
 - A front-end app to connect to consumer's Websocket server to display the messages
 
-> The example is intended to be deployed and run in an Openshift or [CodeReady containers](https://developers.redhat.com/products/codeready-containers/overview) with [Kafka operator](https://strimzi.io/quickstarts/) installed. (Although it is possible to run on a common kafka installation.)
+> The example is intended to be deployed and run in an OpenShift or [CodeReady containers](https://developers.redhat.com/products/codeready-containers/overview) with [Kafka operator](https://strimzi.io/quickstarts/) installed. (Although it is possible to run on a common kafka installation.)
 
 ## Setup Kafka Operator
 
-Installing the Kafka Operator using the Web Console of Openshift is pretty straightforward.  A more visual guide is provided [here](./KAFKA_OPERATOR_SETUP.md)
+Installing the Kafka Operator using the Web Console of OpenShift is pretty straightforward.  A more visual guide is provided [here](./KAFKA_OPERATOR_SETUP.md)
 
 First, go to the *Operator Hub* and search for *Kafka*.  A few choices might show up,  but we want the one that says "Strimzi" which is the community Kafka version.
 
@@ -59,19 +57,19 @@ Similar to the producer backend, the consumer is also using [KafkaJS](https://gi
 
 The front-end part is a vue app that connects via WebSocket to the consumer back-end.
 
-The example is using [nodeshift](https://github.com/nodeshift/nodeshift) to deploy the apps to Openshift.
+The example is using [nodeshift](https://github.com/nodeshift/nodeshift) to deploy the apps to OpenShift.
 
 ### Running the example
 
 ```
 cd producer-backend
-npm run openshift
+npm run OpenShift
 
 cd ../consumer-backend
-npm run openshift
+npm run OpenShift
 
 cd ../frontend
-npm run openshift
+npm run OpenShift
 ```
 
 ### node-rdkafka and KafkaJS
@@ -89,7 +87,7 @@ For KafkaJS there are no additional pre-requisites.
 
 Instead of installing a Kafka instance into your cluster you can also
 use a managed Kafka instance like
-[Red Hat OpenShift Streams for Apache Kafka (RHOSAK)](https://developers.redhat.com/products/red-hat-openshift-streams-for-apache-kafka/overview).
+[Red Hat OpenShift Streams for Apache Kafka (RHOSAK)](https://developers.redhat.com/products/red-hat-OpenShift-streams-for-apache-kafka/overview).
 If you are deploying into OpenShift and using RHOSAK, the example is all
 set up to use service bindings, and to connect your Kafka instance.
 Provided you have installed the OpenShift Application Services and
