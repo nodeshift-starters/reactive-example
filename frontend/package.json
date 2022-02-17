@@ -5,7 +5,7 @@
   "main": "./bin/www",
   "scripts": {
     "lint": "eslint .",
-    "openshift": "npx nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-14",
+    "openshift": "npx nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-16:latest",
     "start": "node ."
   },
   "files": [
@@ -27,6 +27,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.1.0",
-    "nodeshift": "^6.2.0"
+    "nodeshift": "^8.6.1"
   }
 }
