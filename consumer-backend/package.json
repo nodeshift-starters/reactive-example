@@ -19,7 +19,7 @@
     "express": "^4.17.3",
     "kafkajs": "^1.16.0",
     "kube-probe": "^1.0.2",
-    "kube-service-bindings": "^0.0.6",
+    "kube-service-bindings": "^0.0.9",
     "ws": "^8.5.0"
   },
   "devDependencies": {
