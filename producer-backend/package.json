@@ -17,7 +17,7 @@
   "dependencies": {
     "chance": "^1.1.7",
     "dotenv": "^16.0.0",
-    "kafkajs": "^1.16.0",
+    "kafkajs": "^2.0.0",
     "kube-service-bindings": "^0.0.7"
   },
   "devDependencies": {
