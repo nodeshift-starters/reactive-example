@@ -1,6 +1,6 @@
 const Kafka = require('node-rdkafka');
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../.env') });
+require('dotenv').config({ path: path.join(__dirname, '../rhoas.env') });
 const express = require('express');
 const ws = require('ws');
 const app = express();
@@ -23,7 +23,7 @@ const update = (value) =>
 // set default kafka bindings for connecting to the kafka broker
 let kafkaConnectionBindings =
   {
-    'metadata.broker.list': process.env.KAFKA_BOOTSTRAP_SERVER ||
+    'metadata.broker.list': process.env.KAFKA_HOST ||
                             'my-cluster-kafka-bootstrap:9092'
   };
 
@@ -35,8 +35,8 @@ try {
   if (process.env.KAFKA_SASL_MECHANISM === 'plain') {
     kafkaConnectionBindings['sasl.mechanisms'] = 'PLAIN';
     kafkaConnectionBindings['security.protocol'] = 'SASL_SSL';
-    kafkaConnectionBindings['sasl.password'] = process.env.KAFKA_CLIENT_SECRET;
-    kafkaConnectionBindings['sasl.username'] = process.env.KAFKA_CLIENT_ID;
+    kafkaConnectionBindings['sasl.password'] = process.env.RHOAS_CLIENT_SECRET;
+    kafkaConnectionBindings['sasl.username'] = process.env.RHOAS_CLIENT_ID;
   }
 }
 
