@@ -1,6 +1,6 @@
 const { Kafka } = require('kafkajs');
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../.env') });
+require('dotenv').config({ path: path.join(__dirname, '../rhoas.env') });
 const Chance = require('chance');
 const serviceBindings = require('kube-service-bindings');
 
@@ -14,13 +14,13 @@ try {
 } catch (err) {
   // No service bindings. TODO: better error handling here
   kafkaConnectionBindings = {
-    brokers: [process.env.KAFKA_BOOTSTRAP_SERVER || 'my-cluster-kafka-bootstrap:9092']
+    brokers: [process.env.KAFKA_HOST || 'my-cluster-kafka-bootstrap:9092']
   };
   if (process.env.KAFKA_SASL_MECHANISM === 'plain') {
     kafkaConnectionBindings.sasl = {
       mechanism: process.env.KAFKA_SASL_MECHANISM,
-      username: process.env.KAFKA_CLIENT_ID,
-      password: process.env.KAFKA_CLIENT_SECRET
+      username: process.env.RHOAS_CLIENT_ID,
+      password: process.env.RHOAS_CLIENT_SECRET
     };
     kafkaConnectionBindings.ssl = true;
   }
