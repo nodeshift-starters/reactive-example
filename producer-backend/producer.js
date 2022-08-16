@@ -19,8 +19,8 @@ try {
   if (process.env.KAFKA_SASL_MECHANISM === 'plain') {
     kafkaConnectionBindings.sasl = {
       mechanism: process.env.KAFKA_SASL_MECHANISM,
-      username: process.env.RHOAS_CLIENT_ID,
-      password: process.env.RHOAS_CLIENT_SECRET
+      username: process.env.RHOAS_SERVICE_ACCOUNT_CLIENT_ID,
+      password: process.env.RHOAS_SERVICE_ACCOUNT_CLIENT_SECRET
     };
     kafkaConnectionBindings.ssl = true;
   }
