@@ -23,8 +23,8 @@ function initProducer () {
     if (process.env.KAFKA_SASL_MECHANISM === 'plain') {
       kafkaConnectionBindings['sasl.mechanisms'] = 'PLAIN';
       kafkaConnectionBindings['security.protocol'] = 'SASL_SSL';
-      kafkaConnectionBindings['sasl.password'] = process.env.RHOAS_CLIENT_SECRET;
-      kafkaConnectionBindings['sasl.username'] = process.env.RHOAS_CLIENT_ID;
+      kafkaConnectionBindings['sasl.password'] = process.env.RHOAS_SERVICE_ACCOUNT_CLIENT_SECRET;
+      kafkaConnectionBindings['sasl.username'] = process.env.RHOAS_SERVICE_ACCOUNT_CLIENT_ID;
     }
   }
 
