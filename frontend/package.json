@@ -5,18 +5,28 @@
   "main": "./bin/www",
   "scripts": {
     "lint": "eslint .",
-    "openshift": "npx nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-16:latest",
+    "openshift": "npx nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-16",
     "start": "node ."
   },
   "files": [
     "package.json",
     "app.js",
+    "tracing.js",
     "bin",
     "public"
   ],
   "author": "Red Hat, Inc.",
   "license": "Apache-2.0",
   "dependencies": {
+    "@opentelemetry/api": "^1.2.0",
+    "@opentelemetry/exporter-jaeger": "^1.6.0",
+    "@opentelemetry/instrumentation": "^0.32.0",
+    "@opentelemetry/instrumentation-express": "^0.31.0",
+    "@opentelemetry/instrumentation-http": "^0.32.0",
+    "@opentelemetry/resources": "^1.6.0",
+    "@opentelemetry/sdk-trace-base": "^1.6.0",
+    "@opentelemetry/sdk-trace-node": "^1.6.0",
+    "@opentelemetry/semantic-conventions": "^1.6.0",
     "express": "^4.17.3",
     "kube-probe": "^1.0.2"
   },

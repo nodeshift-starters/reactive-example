@@ -1,3 +1,5 @@
+require('./tracing.js');
+
 const fs = require('fs').promises;
 const http = require('http');
 const express = require('express');

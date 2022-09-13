@@ -1,3 +1,5 @@
+require('./tracing.js');
+
 const { Kafka } = require('kafkajs');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../rhoas.env') });
