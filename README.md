@@ -108,3 +108,9 @@ package. In the code you'll see a call to:
 which will get the connection info from the bindings if it is available and
 return it in the format required by the Kafka client.
                                                                                         122,1         Bot
+### OpenTelemetry with OpenShift Distributed Tracing Platform
+
+Clone this repository, switch the branch to `opentelemetry-js-rhosdt`
+and follow the instructions on README.md
+
+Or visualize the instructions via github https://github.com/nodeshift-starters/reactive-example/tree/opentelemetry-js-rhosdt
