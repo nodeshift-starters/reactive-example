@@ -1,5 +1,11 @@
 {
-  "extends": "semistandard",
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2022
+  },
   "rules": {
     "prefer-const": "error",
     "block-scoped-var": "error",
