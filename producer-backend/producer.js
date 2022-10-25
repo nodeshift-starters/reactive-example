@@ -4,9 +4,9 @@ require('dotenv').config({ path: path.join(__dirname, '../rhoas.env') });
 const Chance = require('chance');
 const serviceBindings = require('kube-service-bindings');
 const chance = new Chance();
+const { oauthBearerProvider } = require('./utils.js');
 
 const topic = process.env.KAFKA_TOPIC || 'countries';
-
 
 let kafkaConnectionBindings;
 try {
@@ -17,17 +17,31 @@ try {
   kafkaConnectionBindings = {
     brokers: [process.env.KAFKA_HOST || 'my-cluster-kafka-bootstrap:9092']
   };
+  kafkaConnectionBindings.clientId =
+  process.env.KAFKA_CLIENT_ID || 'kafkajs-producer';
+
   if (process.env.KAFKA_SASL_MECHANISM === 'plain') {
+    kafkaConnectionBindings.ssl = true;
     kafkaConnectionBindings.sasl = {
       mechanism: process.env.KAFKA_SASL_MECHANISM,
       username: process.env.RHOAS_SERVICE_ACCOUNT_CLIENT_ID,
       password: process.env.RHOAS_SERVICE_ACCOUNT_CLIENT_SECRET
     };
+  } else if (process.env.KAFKA_SASL_MECHANISM === 'oauthbearer') {
     kafkaConnectionBindings.ssl = true;
+    const tokenEndpointURL = new URL(process.env.RHOAS_TOKEN_ENDPOINT_URL);
+    kafkaConnectionBindings.sasl = {
+      mechanism: process.env.KAFKA_SASL_MECHANISM,
+      oauthBearerProvider: oauthBearerProvider({
+        clientId: process.env.RHOAS_SERVICE_ACCOUNT_CLIENT_ID,
+        clientSecret: process.env.RHOAS_SERVICE_ACCOUNT_CLIENT_SECRET,
+        host: tokenEndpointURL.origin,
+        path: tokenEndpointURL.pathname,
+        refreshThreshold: 15000
+      })
+    };
   }
 }
-
-kafkaConnectionBindings.clientId = process.env.KAFKA_CLIENT_ID || 'kafkajs-producer';
 
 const kfk = new Kafka(kafkaConnectionBindings);
 
@@ -35,12 +49,16 @@ const producer = kfk.producer();
 
 const createMessage = async () => {
   try {
-    const msg = { key: 'example', value: chance.country({ full: true }), partition: 0 };
-    console.log(msg.value);
+    const msg = {
+      key: 'example',
+      value: chance.country({ full: true }),
+      partition: 0
+    };
     await producer.send({
       topic,
       messages: [msg]
     });
+    console.log(msg.value);
   } catch (err) {
     console.log(err);
   }
