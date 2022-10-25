@@ -1,16 +1,11 @@
-// require('./tracing.js');
-
 const { Kafka } = require('kafkajs');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../rhoas.env') });
 const express = require('express');
 const ws = require('ws');
-const probe = require('kube-probe');
 const app = express();
 const serviceBindings = require('kube-service-bindings');
 
-// Add basic health check endpoints
-probe(app);
 
 const wsServer = new ws.Server({ noServer: true });
 
@@ -57,6 +52,15 @@ const run = async () => {
 };
 
 run();
+
+app.get('/api/health/liveness', (req, res) => {
+  res.send('OK')
+})
+
+app.get('/api/health/readiness', (req, res) => {
+  res.send('OK')
+})
+
 const server = app.listen('8080');
 
 server.on('upgrade', (request, socket, head) => {
