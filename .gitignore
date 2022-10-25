@@ -1,2 +1,7 @@
-node_modules
 tmp
+rhoas.env
+# Dependency directories
+node_modules/
+#System Files
+.DS_Store
+Thumbs.db
