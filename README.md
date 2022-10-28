@@ -64,6 +64,14 @@ KAFKA_CLIENT_ID=kafkajs-consumer
 
 ```
 
+## Related Tutorials
+
+- https://github.com/redhat-developer/app-services-guides/tree/main/docs/kafka/nodejs-kafka
+
+- https://github.com/redhat-developer/app-services-guides/tree/main/docs/kafka/service-binding-kafka
+
+- https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/5b6badee-eaf3-4a10-b5ec-57dc6b94ec0f
+
 ## Deploy the Applications
 
 Both producer and consumer are using [KafkaJS](https://github.com/tulios/kafkajs).
