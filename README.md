@@ -32,6 +32,13 @@ $ oc new-project nodejs-examples
 The last step of the setup, is to create a new Kafka instance.  This can be done from the web console also.  Navigate to the installed operators and click on the kafka one that was just installed.
 
 Before clicking on the *Create Instance* link under the Kafka tab, make sure your "current project namespace" is the one you just created.  Once that is set, click the *Create Instance* link and just use the defaults, which should name the new cluster `my-cluster`
+## Related Tutorials
+
+- https://github.com/redhat-developer/app-services-guides/tree/main/docs/kafka/nodejs-kafka
+
+- https://github.com/redhat-developer/app-services-guides/tree/main/docs/kafka/service-binding-kafka
+
+- https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/5b6badee-eaf3-4a10-b5ec-57dc6b94ec0f
 
 ## Deploy the Applications
 
@@ -111,4 +118,3 @@ return it in the format required by the Kafka client.
 ### OpenTelemetry with OpenShift Distributed Tracing Platform
 
 This [link](./OTEL.md) contains instructions on how to install the 
-OpenShift Distributed Tracing Platform and enable tracing. 
