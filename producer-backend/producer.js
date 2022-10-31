@@ -3,8 +3,10 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../rhoas.env') });
 const Chance = require('chance');
 const serviceBindings = require('kube-service-bindings');
-
 const chance = new Chance();
+
+const topic = process.env.KAFKA_TOPIC || 'countries';
+
 
 let kafkaConnectionBindings;
 try {
@@ -12,7 +14,6 @@ try {
   // service bindings. If so use that connect info
   kafkaConnectionBindings = serviceBindings.getBinding('KAFKA', 'kafkajs');
 } catch (err) {
-  // No service bindings. TODO: better error handling here
   kafkaConnectionBindings = {
     brokers: [process.env.KAFKA_HOST || 'my-cluster-kafka-bootstrap:9092']
   };
@@ -26,8 +27,7 @@ try {
   }
 }
 
-// add the client id
-kafkaConnectionBindings.clientId = 'kafkajs-producer';
+kafkaConnectionBindings.clientId = process.env.KAFKA_CLIENT_ID || 'kafkajs-producer';
 
 const kfk = new Kafka(kafkaConnectionBindings);
 
@@ -38,7 +38,7 @@ const createMessage = async () => {
     const msg = { key: 'example', value: chance.country({ full: true }), partition: 0 };
     console.log(msg.value);
     await producer.send({
-      topic: 'countries',
+      topic,
       messages: [msg]
     });
   } catch (err) {
