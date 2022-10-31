@@ -15,5 +15,7 @@
       "error",
       "nofunc"
     ]
-  }
+  },
+  "quotes": [2, "single"],
+  "comma-dangle": ["error", "never"]
 }
