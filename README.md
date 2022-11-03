@@ -64,7 +64,6 @@ KAFKA_CLIENT_ID=kafkajs-consumer
 
 ```
 
-
 ## Deploy the Applications
 
 Both producer and consumer are using [KafkaJS](https://github.com/tulios/kafkajs).

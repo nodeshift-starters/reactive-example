@@ -6,6 +6,8 @@ const ws = require('ws');
 const app = express();
 const serviceBindings = require('kube-service-bindings');
 
+const topic = process.env.KAFKA_TOPIC || 'countries';
+const groupId = process.env.KAFKA_GROUP_ID || 'consumer-test';
 
 const wsServer = new ws.Server({ noServer: true });
 
@@ -18,7 +20,6 @@ try {
   // service bindings. If so use that connect info
   kafkaConnectionBindings = serviceBindings.getBinding('KAFKA', 'kafkajs');
 } catch (err) {
-  // No service bindings. TODO: better error handling here
   kafkaConnectionBindings = {
     brokers: [process.env.KAFKA_HOST || 'my-cluster-kafka-bootstrap:9092']
   };
@@ -32,16 +33,15 @@ try {
   }
 }
 
-// add the client id
-kafkaConnectionBindings.clientId = 'kafkajs-consumer';
+kafkaConnectionBindings.clientId = process.env.KAFKA_CLIENT_ID || 'kafkajs-consumer';
 
 const kfk = new Kafka(kafkaConnectionBindings);
 
-const consumer = kfk.consumer({ groupId: 'consumer-test' });
+const consumer = kfk.consumer({ groupId });
 
 const run = async () => {
   await consumer.connect();
-  await consumer.subscribe({ topic: 'countries', fromBeginning: true });
+  await consumer.subscribe({ topic, fromBeginning: true });
 
   await consumer.run({
     eachMessage: async ({ message }) => {
