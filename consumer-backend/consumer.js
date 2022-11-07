@@ -26,7 +26,7 @@ try {
   };
 
   kafkaConnectionBindings.clientId =
-  process.env.KAFKA_CLIENT_ID || 'kafkajs-consumer';
+    process.env.KAFKA_CLIENT_ID || 'kafkajs-consumer';
   if (process.env.KAFKA_SASL_MECHANISM === 'plain') {
     kafkaConnectionBindings.ssl = true;
     kafkaConnectionBindings.sasl = {

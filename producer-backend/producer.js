@@ -18,7 +18,7 @@ try {
     brokers: [process.env.KAFKA_HOST || 'my-cluster-kafka-bootstrap:9092']
   };
   kafkaConnectionBindings.clientId =
-  process.env.KAFKA_CLIENT_ID || 'kafkajs-producer';
+    process.env.KAFKA_CLIENT_ID || 'kafkajs-producer';
 
   if (process.env.KAFKA_SASL_MECHANISM === 'plain') {
     kafkaConnectionBindings.ssl = true;
