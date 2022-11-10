@@ -29,15 +29,13 @@ try {
     };
   } else if (process.env.KAFKA_SASL_MECHANISM === 'oauthbearer') {
     kafkaConnectionBindings.ssl = true;
-    const tokenEndpointURL = new URL(process.env.RHOAS_TOKEN_ENDPOINT_URL);
     kafkaConnectionBindings.sasl = {
       mechanism: process.env.KAFKA_SASL_MECHANISM,
       oauthBearerProvider: oauthBearerProvider({
         clientId: process.env.RHOAS_SERVICE_ACCOUNT_CLIENT_ID,
         clientSecret: process.env.RHOAS_SERVICE_ACCOUNT_CLIENT_SECRET,
-        host: tokenEndpointURL.origin,
-        path: tokenEndpointURL.pathname,
-        refreshThreshold: 15000
+        tokenEndpointURL: process.env.RHOAS_TOKEN_ENDPOINT_URL,
+        refreshThresholdMs: 15000
       })
     };
   }
