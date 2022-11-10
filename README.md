@@ -39,7 +39,8 @@ Below is a list of all the environment variables, with their default values, tha
 
 ```
 # The broker where the client will connect to and send the messages
-KAFKA_HOST=my-cluster-kafka-bootstrap:9092
+# Default value `my-cluster-kafka-bootstrap:9092`
+KAFKA_HOST=
 
 # Client id of the kafka instance
 RHOAS_SERVICE_ACCOUNT_CLIENT_ID=
@@ -53,14 +54,18 @@ RHOAS_TOKEN_ENDPOINT_URL=
 # Type of sasl mechanism, valid values are plain or oauthbearer
 KAFKA_SASL_MECHANISM=
 
-# The topic where the kafka client will connect to, for consuming and producing messages
-KAFKA_TOPIC=topic
+# The topic where the kafka client will connect to, for consuming and producing messages.
+# Default value `countries`
+KAFKA_TOPIC=
 
-# Group id of the consumer
-KAFKA_GROUPID=consumer-test
+# Group id of the consumer.
+# Default value `consumer-test`
+KAFKA_GROUPID=
 
 # Id of the kafka client that connects to kafka instance. More info on https://kafka.js.org/docs/configuration#client-id
-KAFKA_CLIENT_ID=kafkajs-consumer
+# Default value for the producer`kafkajs-producer`
+# Default value for the consumer `kafkajs-consumer`
+KAFKA_CLIENT_ID=
 
 ```
 
