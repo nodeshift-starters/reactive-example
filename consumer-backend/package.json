@@ -5,7 +5,7 @@
   "main": "consumer.js",
   "scripts": {
     "lint": "eslint .",
-    "openshift": "npx nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-16:latest",
+    "openshift": "npx nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-18:latest",
     "start": "node ."
   },
   "files": [
