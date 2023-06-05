@@ -31,6 +31,6 @@
   },
   "devDependencies": {
     "nodeshift": "^8.7.0",
-    "eslint": "^8.26.0"
+    "eslint": "^8.40.0"
   }
 }
