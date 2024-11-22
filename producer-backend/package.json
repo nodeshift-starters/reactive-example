@@ -21,7 +21,7 @@
     "kube-service-bindings": "^2.1.0"
   },
   "devDependencies": {
-    "eslint": "^8.24.0",
+    "eslint": "^9.15.0",
     "nodeshift": "^8.7.0"
   }
 }
